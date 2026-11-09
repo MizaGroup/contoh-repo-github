@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduIPA - Media Pembelajaran IPA Interaktif</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Header / Navbar -->
+    <header class="bg-indigo-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                <div class="p-2 bg-white/10 rounded-lg">
+                    <i data-lucide="atom" class="w-8 h-8 text-amber-300"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-xl leading-none">EduIPA</h1>
+                    <span class="text-xs text-indigo-200">Belajar IPA Jadi Lebih Seru</span>
+                </div>
+            </div>
+            
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex space-x-1">
+                <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition hover:bg-indigo-700 bg-indigo-700">Beranda</button>
+                <button onclick="switchTab('materi')" id="nav-materi" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition hover:bg-indigo-700">Materi Interaktif</button>
+                <button onclick="switchTab('simulasi')" id="nav-simulasi" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition hover:bg-indigo-700">Lab & Simulasi</button>
+                <button onclick="switchTab('kuis')" id="nav-kuis" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition hover:bg-indigo-700">Kuis IPA</button>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden p-2 text-white" onclick="toggleMobileMenu()">
+                <i data-lucide="menu" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-indigo-700 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchTab('home'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md font-medium text-white hover:bg-indigo-800">Beranda</button>
+            <button onclick="switchTab('materi'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md font-medium text-white hover:bg-indigo-800">Materi Interaktif</button>
+            <button onclick="switchTab('simulasi'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md font-medium text-white hover:bg-indigo-800">Lab & Simulasi</button>
+            <button onclick="switchTab('kuis'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md font-medium text-white hover:bg-indigo-800">Kuis IPA</button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow container mx-auto px-4 py-6">
+
+        <!-- ================= BERANDA ================= -->
+        <section id="home" class="tab-content active space-y-8">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-3xl p-8 md:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between">
+                <div class="space-y-4 max-w-xl">
+                    <span class="bg-white/20 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Platform Pembelajaran Digital</span>
+                    <h2 class="text-3xl md:text-5xl font-extrabold leading-tight">Jelajahi Rahasia Alam Bersama EduIPA</h2>
+                    <p class="text-indigo-100 text-sm md:text-base">Pelajari konsep Fisika, Biologi, dan Kimia secara visual, praktis, dan menyenangkan dengan alat peraga interaktif.</p>
+                    <div class="pt-2 flex flex-wrap gap-3">
+                        <button onclick="switchTab('materi')" class="bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold px-6 py-3 rounded-xl transition shadow-lg transform hover:-translate-y-0.5">Mulai Belajar</button>
+                        <button onclick="switchTab('kuis')" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl transition border border-white/30">Uji Kemampuan</button>
+                    </div>
+                </div>
+                <div class="mt-8 md:mt-0">
+                    <i data-lucide="microscope" class="w-48 h-48 md:w-64 md:h-64 text-white/90 animate-pulse"></i>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div>
+                <h3 class="text-2xl font-bold mb-6 text-slate-800 flex items-center gap-2">
+                    <i data-lucide="book-open" class="text-indigo-600"></i> Cabang Ilmu IPA
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Biologi -->
+                    <div onclick="openMateriCategory('biologi')" class="bg-white rounded-2xl p-6 shadow-md border border-slate-100 hover:shadow-xl transition cursor-pointer group">
+                        <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                            <i data-lucide="dna" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2 text-slate-800">Biologi</h4>
+                        <p class="text-slate-600 text-sm mb-4">Pelajari tentang makhluk hidup, ekosistem, sistem organ tubuh, dan keanekaragaman hayati.</p>
+                        <span class="text-emerald-600 font-semibold text-sm flex items-center gap-1 group-hover:translate-x-1 transition">Buka Materi <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
+                    </div>
+
+                    <!-- Fisika -->
+                    <div onclick="openMateriCategory('fisika')" class="bg-white rounded-2xl p-6 shadow-md border border-slate-100 hover:shadow-xl transition cursor-pointer group">
+                        <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                            <i data-lucide="zap" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2 text-slate-800">Fisika</h4>
+                        <p class="text-slate-600 text-sm mb-4">Pahami gaya, energi, gerak, tata surya, serta hukum-hukum alam yang bekerja di sekitar kita.</p>
+                        <span class="text-blue-600 font-semibold text-sm flex items-center gap-1 group-hover:translate-x-1 transition">Buka Materi <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
+                    </div>
+
+                    <!-- Kimia -->
+                    <div onclick="openMateriCategory('kimia')" class="bg-white rounded-2xl p-6 shadow-md border border-slate-100 hover:shadow-xl transition cursor-pointer group">
+                        <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                            <i data-lucide="flask-conical" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2 text-slate-800">Kimia</h4>
+                        <p class="text-slate-600 text-sm mb-4">Eksplorasi struktur zat, reaksi kimia, wujud benda, dan tabel periodik unsur.</p>
+                        <span class="text-purple-600 font-semibold text-sm flex items-center gap-1 group-hover:translate-x-1 transition">Buka Materi <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= MATERI ================= -->
+        <section id="materi" class="tab-content space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800">Materi Pembelajaran IPA</h2>
+                    <p class="text-slate-500 text-sm">Pilih topik yang ingin Anda pelajari hari ini</p>
+                </div>
+                <!-- Filter Tabs -->
+                <div class="flex gap-2 bg-slate-200 p-1 rounded-xl">
+                    <button onclick="filterMateri('all')" id="btn-materi-all" class="px-4 py-1.5 rounded-lg text-xs font-semibold transition bg-white shadow-sm">Semua</button>
+                    <button onclick="filterMateri('biologi')" id="btn-materi-biologi" class="px-4 py-1.5 rounded-lg text-xs font-semibold transition text-slate-600">Biologi</button>
+                    <button onclick="filterMateri('fisika')" id="btn-materi-fisika" class="px-4 py-1.5 rounded-lg text-xs font-semibold transition text-slate-600">Fisika</button>
+                    <button onclick="filterMateri('kimia')" id="btn-materi-kimia" class="px-4 py-1.5 rounded-lg text-xs font-semibold transition text-slate-600">Kimia</button>
+                </div>
+            </div>
+
+            <!-- List Materi -->
+            <div id="materi-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Dynamically Inserted via JS -->
+            </div>
+        </section>
+
+        <!-- ================= LAB & SIMULASI ================= -->
+        <section id="simulasi" class="tab-content space-y-8">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800">Laboratorium & Simulasi Interaktif</h2>
+                <p class="text-slate-500 text-sm">Uji coba dan praktek konsep sains secara virtual</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Simulasi 1: Konverter Suhu (Fisika) -->
+                <div class="bg-white rounded-2xl p-6 shadow-md border border-slate-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-3 bg-blue-100 text-blue-600 rounded-xl">
+                            <i data-lucide="thermometer" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-800">Kalkulator Konversi Suhu</h3>
+                            <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-md font-medium">Fisika</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Masukkan Nilai Suhu (°C - Celsius)</label>
+                            <input type="number" id="temp-input" value="100" oninput="convertTemperature()" class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-3 text-center">
+                            <div class="bg-slate-50 p-3 rounded-xl border">
+                                <span class="text-xs text-slate-500 block">Fahrenheit</span>
+                                <span id="res-fahrenheit" class="text-lg font-bold text-indigo-600">212 °F</span>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border">
+                                <span class="text-xs text-slate-500 block">Kelvin</span>
+                                <span id="res-kelvin" class="text-lg font-bold text-indigo-600">373.15 K</span>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border">
+                                <span class="text-xs text-slate-500 block">Reamur</span>
+                                <span id="res-reamur" class="text-lg font-bold text-indigo-600">80 °R</span>
+                            </div>
+                        </div>
+
+                        <!-- Visual Indicator -->
+                        <div class="pt-2">
+                            <div class="flex justify-between text-xs text-slate-500 mb-1">
+                                <span>Beku (0°C)</span>
+                                <span>Mendidih (100°C)</span>
+                            </div>
+                            <div class="w-full bg-slate-200 h-3 rounded-full overflow-hidden">
+                                <div id="temp-bar" class="bg-gradient-to-r from-blue-500 via-amber-500 to-red-500 h-full transition-all duration-300" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulasi 2: Interactive Element Explorer (Kimia) -->
+                <div class="bg-white rounded-2xl p-6 shadow-md border border-slate-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-3 bg-purple-100 text-purple-600 rounded-xl">
+                            <i data-lucide="atom" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-800">Eksplorasi Unsur Kimia</h3>
+                            <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-md font-medium">Kimia</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <p class="text-xs text-slate-600">Klik salah satu unsur di bawah untuk melihat detail atomnya:</p>
+                        
+                        <div class="grid grid-cols-4 gap-2">
+                            <button onclick="showElementDetail('H')" class="p-3 border rounded-xl text-center hover:bg-purple-50 hover:border-purple-300 transition">
+                                <span class="text-xs text-slate-400 block">1</span>
+                                <span class="text-xl font-bold text-purple-600">H</span>
+                                <span class="text-[10px] text-slate-500 block truncate">Hidrogen</span>
+                            </button>
+                            <button onclick="showElementDetail('O')" class="p-3 border rounded-xl text-center hover:bg-purple-50 hover:border-purple-300 transition">
+                                <span class="text-xs text-slate-400 block">8</span>
+                                <span class="text-xl font-bold text-purple-600">O</span>
+                                <span class="text-[10px] text-slate-500 block truncate">Oksigen</span>
+                            </button>
+                            <button onclick="showElementDetail('C')" class="p-3 border rounded-xl text-center hover:bg-purple-50 hover:border-purple-300 transition">
+                                <span class="text-xs text-slate-400 block">6</span>
+                                <span class="text-xl font-bold text-purple-600">C</span>
+                                <span class="text-[10px] text-slate-500 block truncate">Karbon</span>
+                            </button>
+                            <button onclick="showElementDetail('Fe')" class="p-3 border rounded-xl text-center hover:bg-purple-50 hover:border-purple-300 transition">
+                                <span class="text-xs text-slate-400 block">26</span>
+                                <span class="text-xl font-bold text-purple-600">Fe</span>
+                                <span class="text-[10px] text-slate-500 block truncate">Besi</span>
+                            </button>
+                        </div>
+
+                        <!-- Element Detail Card -->
+                        <div id="element-detail" class="bg-purple-50 p-4 rounded-xl border border-purple-200">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 id="elem-name" class="font-bold text-purple-900 text-lg">Hidrogen (H)</h4>
+                                    <p id="elem-desc" class="text-xs text-purple-700 mt-1">Unsur paling berlimpah di alam semesta. Ringan dan sangat mudah terbakar.</p>
+                                </div>
+                                <span id="elem-num" class="bg-purple-200 text-purple-800 text-xs font-bold px-2 py-1 rounded">No. Atom: 1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= KUIS ================= -->
+        <section id="kuis" class="tab-content space-y-6">
+            <div class="max-w-2xl mx-auto bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-slate-100">
+                <!-- Header Kuis -->
+                <div class="flex justify-between items-center pb-4 border-b">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-800">Kuis Pengetahuan IPA</h2>
+                        <span class="text-xs text-slate-500">Uji pemahaman kamu tentang IPA</span>
+                    </div>
+                    <div id="quiz-score-badge" class="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold">
+                        Skor: <span id="current-score">0</span>
+                    </div>
+                </div>
+
+                <!-- Quiz Main Area -->
+                <div id="quiz-body" class="py-6 space-y-6">
+                    <div class="flex justify-between items-center text-xs font-semibold text-slate-400">
+                        <span id="quiz-progress">Pertanyaan 1 dari 5</span>
+                        <span id="quiz-category-tag" class="uppercase bg-slate-100 text-slate-600 px-2 py-0.5 rounded">Biologi</span>
+                    </div>
+
+                    <h3 id="quiz-question" class="text-lg font-bold text-slate-800 leading-snug">...</h3>
+
+                    <div id="quiz-options" class="space-y-3">
+                        <!-- Options dynamically injected -->
+                    </div>
+                </div>
+
+                <!-- Quiz Results Area (Hidden by default) -->
+                <div id="quiz-result" class="hidden text-center py-8 space-y-4">
+                    <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto">
+                        <i data-lucide="trophy" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800">Kuis Selesai!</h3>
+                    <p class="text-slate-600">Kamu berhasil menyelesaikan kuis ini.</p>
+                    <div class="bg-slate-50 p-4 rounded-2xl max-w-xs mx-auto border">
+                        <span class="text-xs text-slate-500 block">Skor Akhir Kamu</span>
+                        <span id="final-score" class="text-4xl font-extrabold text-indigo-600">0</span>
+                    </div>
+                    <button onclick="restartQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2.5 rounded-xl transition shadow-lg">
+                        Coba Lagi
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-6 mt-12">
+        <div class="container mx-auto px-4 text-center text-xs space-y-2">
+            <p>&copy; 2026 EduIPA. Platform Pembelajaran Ilmu Pengetahuan Alam.</p>
+            <p class="text-slate-500">Siap di-deploy ke GitHub Pages & Vercel</p>
+        </div>
+    </footer>
+</body>
+</html>
